@@ -1,22 +1,20 @@
 <template>
-  <el-container>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
-  </el-container>
+  <keep-alive>
+    <router-view/>
+  </keep-alive>
 </template>
 
 <script>
   export default {
     name: 'App',
-    data() {
+    data () {
       return {
         router: true,
       };
     },
     computed: {
-      getRouterPath() {
-        return this.$route.path.replace("/", "")
+      getRouterPath () {
+        return this.$route.path.replace('/', '')
       }
     }
   }
