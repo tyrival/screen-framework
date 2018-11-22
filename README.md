@@ -26,28 +26,14 @@ config: {
     map: [],
     // 地图以外的各区域的组件布局，每个layout对应一个二级菜单
     // 每个layout的索引与subIndex相等时显示
-    layouts: [{
-        // 左面板配置
-        leftPanel: [{
-            path: 'components/base/Plugin',
-            config: {
-                id: 'abc',
-                option: {type: 'container', html: 'hello world!'}
-            }
-        }],
-        // 右面板配置
-        rightPanel: [],
-        // 左漂浮面板配置
-        leftFloat: [],
-        // 右漂浮面板配置
-        rightFloat: [],
-        // 漂浮条配置
-        floatBar: [],
-        // 漂浮组件配置
-        floatCmp: [],
-    }, {
-        // 另一个layout
-    }],
+    layouts: [
+        [
+            {path: null, config: null},
+        ],
+        [
+            // 另一个layout
+        ]
+    ],
     // 状态绑定规则，其中 menuIndex 和 subMenuIndex 为保留名称，禁止使用
     binder: {}
     }
@@ -672,7 +658,7 @@ config: {
         // 停止时事件
         onStop: (player) { },
         // 重置时事件
-        onReset: (player) { },
+        onReset: (player) { }
     },
 }
 ```

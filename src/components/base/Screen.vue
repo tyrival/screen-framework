@@ -3,80 +3,24 @@
        :class="config.base && config.base.class"
        :style="config.base && config.base.style"
        :id="config.id">
+
     <!-- 菜单 -->
     <Menu :config="config.menu"></Menu>
+
     <!-- 二级菜单，为了兼容两级菜单分离的情况 -->
     <SubMenu :config="config.menu"></SubMenu>
-    <!-- 左侧面板 -->
-    <div class="left-panel">
-      <template v-for="(layout, index) in config.layouts">
-        <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
-          <template v-for="(item, j) in layout.leftPanel">
-            <!-- 装载插件，并将config参数传入 -->
-            <component :is="loader.leftPanel[index][j].default"
-                       :config="item.config"></component>
-          </template>
-        </template>
-      </template>
-    </div>
-    <!-- 右侧面板 -->
-    <div class="right-panel">
-      <template v-for="(layout, index) in config.layouts">
-        <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
-          <template v-for="(item, j) in layout.rightPanel">
-            <!-- 装载插件，并将config参数传入 -->
-            <component :is="loader.rightPanel[index][j].default"
-                       :config="item.config"></component>
-          </template>
-        </template>
-      </template>
-    </div>
-    <!-- 左侧浮动面板 -->
-    <div class="left-float">
-      <template v-for="(layout, index) in config.layouts">
-        <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
-          <template v-for="(item, j) in layout.leftFloat">
-            <!-- 装载插件，并将config参数传入 -->
-            <component :is="loader.leftFloat[index][j].default"
-                       :config="item.config"></component>
-          </template>
-        </template>
-      </template>
-    </div>
-    <!-- 右侧浮动面板 -->
-    <div class="right-float">
-      <template v-for="(layout, index) in config.layouts">
-        <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
-          <template v-for="(item, j) in layout.rightFloat">
-            <!-- 装载插件，并将config参数传入 -->
-            <component :is="loader.rightFloat[index][j].default"
-                       :config="item.config"></component>
-          </template>
-        </template>
-      </template>
-    </div>
-    <!-- 浮动工具条 -->
-    <div class="float-bar">
-      <template v-for="(layout, index) in config.layouts">
-        <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
-          <template v-for="(item, j) in layout.floatBar">
-            <!-- 装载插件，并将config参数传入 -->
-            <component :is="loader.floatBar[index][j].default"
-                       :config="item.config"></component>
-          </template>
-        </template>
-      </template>
-    </div>
+
     <!-- 浮动组件 -->
-    <template v-for="(layout, index) in config.layouts">
-      <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
-        <template v-for="(item, j) in layout.floatCmp">
+    <template v-for="(layout, i) in config.layouts">
+      <template v-if="i === $store.state.navigator.menu[config.menu.index].index.value">
+        <template v-for="(item, j) in layout">
           <!-- 装载插件，并将config参数传入 -->
-          <component :is="loader.floatCmp[index][j].default"
+          <component :is="loader.component[i][j].default"
                      :config="item.config"></component>
         </template>
       </template>
     </template>
+
     <!-- 地图 -->
     <div class="map">
       <template v-for="(item, index) in config.map.components">
@@ -100,18 +44,12 @@
       return {
         // 动态载入组件
         loader: {
-          leftPanel: [],
-          rightPanel: [],
-          leftFloat: [],
-          rightFloat: [],
-          floatBar: [],
-          floatCmp: [],
+          component: [],
           map: []
         },
       };
     },
     created () {
-      debugger
       this.initConfig();
       this.initComponent();
       this.initBinder();
@@ -129,7 +67,6 @@
         if (!this.config.binder) {
           this.config.binder = {};
         }
-        ;
         this.config.binder.menuIndex = ['config.menu.index', 'navigator.index'];
         this.config.binder.subMenuIndex =
           ['config.menu.subIndex', 'navigator.menu[' + this.config.menu.index + '].index'];
@@ -168,18 +105,7 @@
        */
       initComponent () {
         // 载入各布局的组件
-        if (!this.config || !this.config.layouts || !this.config.layouts.length) {
-          return;
-        }
-        for (let i = 0; i < this.config.layouts.length; i++) {
-          let layout = this.config.layouts[i];
-          this.dynamicLoadComponent(layout.leftPanel, 'leftPanel', i);
-          this.dynamicLoadComponent(layout.rightPanel, 'rightPanel', i);
-          this.dynamicLoadComponent(layout.leftFloat, 'leftFloat', i);
-          this.dynamicLoadComponent(layout.rightFloat, 'rightFloat', i);
-          this.dynamicLoadComponent(layout.floatBar, 'floatBar', i);
-          this.dynamicLoadComponent(layout.floatCmp, 'floatCmp', i);
-        }
+        this.dynamicLoadComponent();
         // 载入地图
         this.dynamicLoadMap();
       },
@@ -187,14 +113,21 @@
        * 动态载入组件
        * @param comps
        */
-      dynamicLoadComponent (compGroup, loaderStack, index) {
-        if (!compGroup || !compGroup.length) {
+      dynamicLoadComponent () {
+        // 载入各布局的组件
+        if (!this.config || !this.config.layouts || !this.config.layouts.length) {
           return;
         }
-        this.loader[loaderStack][index] = []
-        for (let i = 0; i < compGroup.length; i++) {
-          let item = compGroup[i];
-          this.loader[loaderStack][index].push(require('../../' + item.path + '.vue'))
+        for (let i = 0; i < this.config.layouts.length; i++) {
+          let layout = this.config.layouts[i];
+          this.loader.component[i] = []
+          if (!layout || !layout.length) {
+            continue;
+          }
+          for (let j = 0; j < layout.length; j++) {
+            let item = layout[j];
+            this.loader.component[i].push(require('../../' + item.path + '.vue'));
+          }
         }
       },
       /**
