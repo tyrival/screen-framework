@@ -20,7 +20,7 @@
       </template>
     </div>
     <!-- 右侧面板 -->
-    <div class="left-panel">
+    <div class="right-panel">
       <template v-for="(layout, index) in config.layouts">
         <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
           <template v-for="(item, j) in layout.rightPanel">
@@ -111,7 +111,7 @@
     },
     methods: {
       /**
-       * 初始化配置项
+       * 初始化配置
        */
       initConfig () {
         if (!this.config.binder) {
