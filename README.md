@@ -43,6 +43,8 @@ config: {
         rightFloat: [],
         // 漂浮条配置
         floatBar: [],
+        // 漂浮组件配置
+        floatCmp: [],
     }, {
         // 另一个layout
     }],

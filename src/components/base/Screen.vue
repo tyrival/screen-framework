@@ -67,6 +67,16 @@
         </template>
       </template>
     </div>
+    <!-- 浮动组件 -->
+    <template v-for="(layout, index) in config.layouts">
+      <template v-if="index === $store.state.navigator.menu[config.menu.index].index.value">
+        <template v-for="(item, j) in layout.floatCmp">
+          <!-- 装载插件，并将config参数传入 -->
+          <component :is="loader.floatCmp[index][j].default"
+                     :config="item.config"></component>
+        </template>
+      </template>
+    </template>
     <!-- 地图 -->
     <div class="map">
       <template v-for="(item, index) in config.map.components">
@@ -95,11 +105,13 @@
           leftFloat: [],
           rightFloat: [],
           floatBar: [],
+          floatCmp: [],
           map: []
         },
       };
     },
     created () {
+      debugger
       this.initConfig();
       this.initComponent();
       this.initBinder();
@@ -111,7 +123,7 @@
     },
     methods: {
       /**
-       * 初始化配置
+       * 初始化配置项
        */
       initConfig () {
         if (!this.config.binder) {
@@ -166,6 +178,7 @@
           this.dynamicLoadComponent(layout.leftFloat, 'leftFloat', i);
           this.dynamicLoadComponent(layout.rightFloat, 'rightFloat', i);
           this.dynamicLoadComponent(layout.floatBar, 'floatBar', i);
+          this.dynamicLoadComponent(layout.floatCmp, 'floatCmp', i);
         }
         // 载入地图
         this.dynamicLoadMap();
