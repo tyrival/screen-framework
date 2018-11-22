@@ -52,8 +52,7 @@ config: {
 }
 ```
 
-2. 分离了Menu和SubMenu，使其适配一二级菜单分离的场景；
-3. 重构了基本组件，设置了顶级子组件`src/components/base/Base.vue`，组件的基本配置如下：
+2. 重构了基本组件，设置了顶级子组件`src/components/base/Base.vue`，组件的基本配置如下：
 
 ```
 config: {
@@ -114,6 +113,8 @@ config: {
 }
 ```
 
+3. 分离了Menu和SubMenu，使其适配一二级菜单分离的场景；
+4. 修复了Chart隐藏后再显示时，尺寸不正常的问题；
 
 
 ## 1. 概述
