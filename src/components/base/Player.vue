@@ -180,5 +180,5 @@
     components: {
       'Base': Base
     }
-  };
+  }
 </script>
