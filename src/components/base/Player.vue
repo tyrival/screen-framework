@@ -2,7 +2,7 @@
   <Base :config="config">
     <slot name="player-before"></slot>
     <!-- 用于管理通用的报表容器样式 -->
-    <div :id="id" class="player-ins">
+    <div :id="config.id" class="player-ins">
       <div class="stop-area">
         <el-button v-if="config.option.playable"
                    :disabled="!state.playing"
@@ -108,21 +108,12 @@
         this.proxyMethod(this.config.event, 'onStop', [this]);
       },
       /**
-       * 重置
-       */
-      reset () {
-        this.state.playing = false;
-        this.state.index = 0;
-        clearInterval(this.state.thread);
-        this.proxyMethod(this.config.event, 'onReset', [this]);
-      },
-      /**
        * 处理节点
        */
       onNodeClick (value) {
         this.state.playing = false;
         clearInterval(this.state.thread);
-        this.proxyMethod(this.config.event, 'onHandlerNode', [value, this.config.option.data[value], this]);
+        this.proxyMethod(this.config.event, 'onNode', [value, this.config.option.data[value], this]);
       },
       /**
        * 提示内容格式
@@ -131,7 +122,7 @@
         if (!value) {
           return;
         }
-        return this.proxyMethod(this.handler, 'formatTooltip', [value, this.config.option.data[value], this]);
+        return this.proxyMethod(this.event, 'formatTooltip', [value, this.config.option.data[value], this]);
       },
       /**
        * 处理图标
