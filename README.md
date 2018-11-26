@@ -153,7 +153,7 @@ src
 
 ## 4. 架构
 
-![image-20181122152413205](https://ws1.sinaimg.cn/large/006tNbRwgy1fxgvbn0yw9j31ji0qiql6.jpg)
+![image-20181126115004608](https://ws2.sinaimg.cn/large/006tNbRwgy1fxlblww1xlj31le0r4qh4.jpg)
 
 - 带阴影框表示页面（View），无阴影框表示组件（Component），虚线框表示插槽（Slot）；
 
@@ -163,7 +163,7 @@ src
 
 ## 5. 组件生命周期
 
-![image-20180822154042130](https://ws1.sinaimg.cn/large/006tNbRwgy1fuiisamjg8j31k00viaff.jpg)
+![image-20181126115116820](https://ws4.sinaimg.cn/large/006tNbRwgy1fxlbn5m50zj31oo0s0ws6.jpg)
 
 - Vuex作为全局状态存储；
 
