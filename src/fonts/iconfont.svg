@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="play" unicode="&#58880;" d="M204.58705-55.16208800000004L204.58705 823.163111 819.41295 384.001023Z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="pause" unicode="&#59576;" d="M448 24.4 448 743.8c0 13.4-10.8 24.2-24.4 24.2l-143.2 0c-13.6 0-24.4-10.8-24.4-24.2l0-719.4c0-13.4 10.8-24.4 24.4-24.4l143.2 0C437.2 0 448 10.8 448 24.4zM743.6 768l-143.2 0c-13.4 0-24.4-10.8-24.4-24.2l0-719.4c0-13.4 10.8-24.4 24.4-24.4l143.2 0c13.4 0 24.4 10.8 24.4 24.4L768 743.8C768 757.2 757.2 768 743.6 768z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="stop" unicode="&#59616;" d="M874.8 768 149.2 768C137.4 768 128 758.6 128 746.8l0-725.6c0-11.8 9.4-21.2 21.2-21.2l725.6 0c11.6 0 21.2 9.4 21.2 21.2L896 746.8C896 758.6 886.4 768 874.8 768z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>

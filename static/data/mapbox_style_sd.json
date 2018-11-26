@@ -1,0 +1,18 @@
+{
+	"version": 8,
+	"sources": {
+		 "raster-tiles": {
+			 "type": "raster",
+			 "tiles": ["http://61.160.70.170:8089/Java/proxy.jsp?http://61.160.70.170:10001/SDResource/{level}/{col}/{row}/{suffix}.PNG"],
+			 "tileType": "ocn",
+			 "tileSize": 256
+		}
+	},
+	"layers": [{
+		"id": "simple-tiles",
+		"type": "raster",
+		"source": "raster-tiles",
+		"minzoom": 0,
+		"maxzoom": 24
+	}]
+}
