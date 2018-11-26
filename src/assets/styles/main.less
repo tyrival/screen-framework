@@ -20,8 +20,85 @@ html, body {
 }
 
 .viewport {
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
+
+  @menu-height: 40px;
+  @panel-margin: 20px;
+  @panel-width: 300px;
+
+  .menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @menu-height;
+    z-index: 1;
+    /* TODO 线框图，需删除 */
+    border: 1px solid #cccccc;
+  }
+
+  @sub-menu-width: 300px;
+  .sub-menu {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    width: @sub-menu-width;
+    margin-left: -@sub-menu-width / 2;
+    height: 60px;
+    z-index: 1;
+    /* TODO 线框图，需删除 */
+    border: 1px solid #cccccc;
+  }
+
+  .left-panel {
+    position: absolute;
+    top: @menu-height + @panel-margin;
+    left: @panel-margin;
+    bottom: @panel-margin;
+    width: @panel-width;
+    z-index: 1;
+    /* TODO 线框图，需删除 */
+    border: 1px solid #cccccc;
+  }
+
+  .right-panel {
+    position: absolute;
+    top: @menu-height + @panel-margin;
+    right: @panel-margin;
+    bottom: @panel-margin;
+    width: @panel-width;
+    z-index: 1;
+    /* TODO 线框图，需删除 */
+    border: 1px solid #cccccc;
+  }
+
+  .left-float {
+
+  }
+
+  .right-float {
+
+  }
+
+  .float-bar {
+
+  }
+
+  .map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    /* TODO 线框图，需删除 */
+    border: 1px solid #cccccc;
+
+  }
 }
+

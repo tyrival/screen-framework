@@ -68,6 +68,7 @@
       this.initIcon();
       this.initBase();
       this.initBinder();
+      this.initEvent();
     },
     beforeDestroy () {
       // 销毁前注销组件的数据绑定
@@ -82,13 +83,14 @@
       play () {
         this.state.playing = true;
         this.proxyMethod(this.event, 'onPlay', [this]);
-        this.state.thread = setInterval(() => {
-          this.proxyMethod(this.event, 'onHandlerNode', [this.state.index, this.config.option.data[this.state.index], this]);
-          this.state.index++;
-          if (this.state.index == this.config.option.data.length) {
-            this.stop();
+        let me = this;
+        me.state.thread = setInterval(() => {
+          me.proxyMethod(me.config.event, 'onNode', [me.state.index, me.config.option.data[me.state.index], me]);
+          me.state.index++;
+          if (me.state.index == me.config.option.data.length) {
+            me.stop();
           }
-        }, this.state.interval);
+        }, me.state.interval);
       },
       /**
        * 暂停
@@ -96,7 +98,7 @@
       pause () {
         this.state.playing = false;
         clearInterval(this.state.thread);
-        this.proxyMethod(this.event, 'onPause', [this.state.index, this.config.option.data[this.state.index], this]);
+        this.proxyMethod(this.config.event, 'onPause', [this.state.index, this.config.option.data[this.state.index], this]);
       },
       /**
        * 停止
@@ -122,7 +124,7 @@
         if (!value) {
           return;
         }
-        return this.proxyMethod(this.event, 'formatTooltip', [value, this.config.option.data[value], this]);
+        return this.proxyMethod(this.config.event, 'formatTooltip', [value, this.config.option.data[value], this]);
       },
       /**
        * 处理图标
@@ -159,6 +161,12 @@
         }
       },
       /**
+       * 处理绑定参数
+       */
+      initEvent () {
+        this.config.event = _.assignIn({}, this.config.event);
+      },
+      /**
        * 修改binder的值
        */
       commitBinder (binderKey, value) {
@@ -168,7 +176,7 @@
        * 修改store的值
        */
       commit (stateProp, value) {
-        this.$children[0].commit(binderKey, value);
+        this.$children[0].commit(stateProp, value);
       },
       /**
        * 修改store的值
@@ -180,5 +188,5 @@
     components: {
       'Base': Base
     }
-  }
+  };
 </script>

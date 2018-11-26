@@ -13,20 +13,22 @@ export default new Vuex.Store({
       index: {value: 0},
       // 一级菜单
       menu: [{
-        name: '',
-        url: '',
+        name: '交通出行监测',
+        url: './traffic',
         icon: '',
         // 当前激活的二级菜单
         index: {value: 0},
         // 二级菜单
-        submenu: [{name: ''}]
+        submenu: [{name: '总览'}, {name: '静态交通'}, {name: '动态交通'}, {name: '交通事件'}]
       }]
     },
 
     // 主题大屏组件状态
     screen: {
-      medical: {
-        show: {value: false}
+      // 交通专题
+      traffic: {
+        // 时间轴当前选择的年份
+        timelineYear: {value: null},
       }
     }
   },

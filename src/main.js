@@ -8,7 +8,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import API from "./config/api"
-// import "./fonts/iconfont.css";
+import "./fonts/iconfont.css";
 
 Vue.config.productionTip = false
 

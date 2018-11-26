@@ -60,7 +60,7 @@
        * 初始化基础属性
        */
       initBase () {
-        this.id = this.config.id || 'chart-' + new Date().getTime();
+        this.config.id = this.config.id || 'chart-' + new Date().getTime();
         this.config.base = _.assignIn({}, {
           show: true,
           class: null,
@@ -77,7 +77,7 @@
        * 初始化数据代理
        */
       initProxy () {
-        if (!this.config.proxy || !this.config.proxy.remote) {
+        if (!this.config.proxy || this.config.proxy.remote === false) {
           return;
         }
         if (!this.config.proxy.url) {
@@ -128,9 +128,9 @@
        * 加载配置
        */
       render () {
-        if (this.config.proxy && this.config.proxy.remote) {
-          this.dataProxy.then((data) => {
-            this.config.data = data;
+        if (this.config.proxy && this.config.proxy.remote !== false) {
+          this.dataProxy.then((response) => {
+            this.config.data = response.data;
           }).catch(() => {
           }).finally(() => {
             this.doRender();
@@ -163,13 +163,13 @@
       },
     },
     watch: {
-      option: {
+      "config.option": {
         deep: true,
         handler: function (val) {
           this.render();
         }
       },
-      proxy: {
+      "config.proxy": {
         deep: true,
         handler: function (val) {
           this.initProxy();

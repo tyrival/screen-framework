@@ -23,7 +23,7 @@
 
     <!-- 地图 -->
     <div class="map">
-      <template v-for="(item, index) in config.map.components">
+      <template v-for="(item, index) in config.map">
         <component :is="loader.map[index].default"
                    :config="item.config"></component>
       </template>

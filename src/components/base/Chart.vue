@@ -53,7 +53,7 @@
        * 初始化基础属性
        */
       initBase () {
-        this.id = this.config.id || 'chart-' + new Date().getTime();
+        this.config.id = this.config.id || 'chart-' + new Date().getTime();
         this.config.base = _.assignIn({
           style: {width: 400, height: 300}
         }, this.config.base);
@@ -153,7 +153,7 @@
        * 修改store的值
        */
       commit (stateProp, value) {
-        this.$children[0].commit(binderKey, value);
+        this.$children[0].commit(stateProp, value);
       },
       /**
        * 修改store的值

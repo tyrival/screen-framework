@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Medical from '@/views/medical/Medical'
+import Traffic from '@/views/traffic/Traffic'
 
 Vue.use(Router)
 
@@ -9,8 +9,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Medical',
-      component: Medical
+      name: 'Traffic',
+      component: Traffic
     }
   ]
 })
